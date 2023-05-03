@@ -2,9 +2,9 @@
 
 ### ToDo List:
 - [ ] Integrate with an API
-- [ ] Create services
-- [ ] Dependency inject mappers
-- [ ] Dependency inject service
+- [x] Create services
+- [x] Dependency inject mappers
+- [x] Dependency inject service
 - [ ] Async
 - [x] Add to GitHub
 - [x] Setup MyBatis

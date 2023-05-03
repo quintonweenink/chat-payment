@@ -1,19 +1,22 @@
 package com.ximedes.paymentprovider
 
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
-
 
 @RestController
 class PaymentController {
 
-    @GetMapping("/helloWorld")
-    fun helloWorld(): Transaction{
+    private lateinit var transactionService: TransactionService
 
-        Config.buildqlSessionFactory()?.openSession().use { session ->
-            val mapper = session?.getMapper(TransactionMapper::class.java);
+    @Autowired
+    fun PaymentController(transactionService: TransactionService) {
+        this.transactionService = transactionService;
+    }
 
-            return mapper?.getTransactions() ?: Transaction()
-        }
+    @GetMapping("/getLastTransaction")
+    fun getLastTransaction(): Transaction {
+
+        return transactionService.getLastTransaction()
     }
 }
