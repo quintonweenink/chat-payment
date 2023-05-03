@@ -6,7 +6,7 @@
 - [ ] Dependency inject mappers
 - [ ] Dependency inject service
 - [ ] Async
-- [ ] Add to GitHubs
+- [x] Add to GitHub
 - [x] Setup MyBatis
 - [x] Setup Spring
 - [x] Setup Postgres
