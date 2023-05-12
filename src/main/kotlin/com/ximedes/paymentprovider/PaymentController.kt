@@ -5,18 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class PaymentController {
+class PaymentController(@Autowired transactionServicef: TransactionService) {
 
-    private lateinit var transactionService: TransactionService
-
-    @Autowired
-    fun PaymentController(transactionService: TransactionService) {
-        this.transactionService = transactionService;
+    private final var transactionService: TransactionService
+    init {
+        transactionService = transactionServicef;
     }
 
     @GetMapping("/getLastTransaction")
-    fun getLastTransaction(): Transaction {
-
-        return transactionService.getLastTransaction()
-    }
+    suspend fun getLastTransaction(): Transaction = transactionService.getLastTransaction()
 }

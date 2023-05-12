@@ -1,11 +1,16 @@
 package com.ximedes.paymentprovider
 
+import kotlinx.coroutines.async
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.web.client.RestTemplate
 import org.springframework.web.client.getForObject
+import kotlin.coroutines.CoroutineContext
+import kotlin.coroutines.coroutineContext
 
 @Service
 class TransactionService {
@@ -20,13 +25,16 @@ class TransactionService {
         this.restTemplate = restTemplate
     }
 
-    fun getLastTransaction(): Transaction {
-        val quote: String = restTemplate.getForObject(
-                "https://www.google.com", String::class)
-        logger.info(quote)
+    suspend fun getLastTransaction(): Transaction {
+        coroutineScope {
+            launch {
+                val quote: String = restTemplate.getForObject(
+                        "https://www.google.com", String::class)
+                logger.info(quote)
+            }
+            return async { transactionMapper.getLastTransaction() }
 
-        return transactionMapper.getLastTransaction()
-
-
+            if(transactionDeferred.)
+        }
     }
 }
